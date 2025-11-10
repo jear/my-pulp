@@ -22,15 +22,15 @@ spec:
     replicas: 1
   worker:
     replicas: 1
-  database:
-    postgres_storage_class: rook-ceph-block
   cache:
     enabled: true
     redis_storage_class: rook-ceph-block
   web:
     replicas: 1
 
-  postgres_storage_class: rook-ceph-block
+  database:
+    enabled: true
+    postgres_storage_class: rook-ceph-block
 
 #  file_storage_storage_class: my-sc-for-pulpcore
   file_storage_storage_class: rook-cephfs
