@@ -30,6 +30,8 @@ spec:
   web:
     replicas: 1
 
+  postgres_storage_class: rook-ceph-block
+
 #  file_storage_storage_class: my-sc-for-pulpcore
   file_storage_storage_class: rook-cephfs
   file_storage_access_mode: "ReadWriteMany"
