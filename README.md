@@ -30,6 +30,7 @@ spec:
 
   database:
     postgres_storage_class: rook-ceph-block
+    postgres_storage_size: "50Gi"
 
 #  file_storage_storage_class: my-sc-for-pulpcore
   file_storage_storage_class: rook-cephfs
