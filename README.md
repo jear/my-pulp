@@ -25,6 +25,7 @@ spec:
   database:
     postgres_storage_class: rook-ceph-block
   cache:
+    enabled: true
     redis_storage_class: rook-ceph-block
   web:
     replicas: 1
