@@ -29,7 +29,7 @@ spec:
 
   file_storage_access_mode: "ReadWriteMany"
   file_storage_size: "50Gi"
-  file_storage_storage_class: dafault
+  file_storage_storage_class: default
 EOF
 ```
 
