@@ -23,14 +23,14 @@ spec:
   worker:
     replicas: 1
   database:
-    postgres_storage_class: default
+    postgres_storage_class: rook-ceph-block
   cache:
-    redis_storage_class: default
+    redis_storage_class: rook-ceph-block
   web:
     replicas: 1
 
 #  file_storage_storage_class: my-sc-for-pulpcore
-  file_storage_storage_class: default
+  file_storage_storage_class: rook-cephfs
   file_storage_access_mode: "ReadWriteMany"
   file_storage_size: "50Gi"
  
