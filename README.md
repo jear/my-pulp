@@ -24,12 +24,16 @@ spec:
     replicas: 1
   database:
     postgres_storage_class: default
+  cache:
+    redis_storage_class: default
   web:
     replicas: 1
 
+#  file_storage_storage_class: my-sc-for-pulpcore
+  file_storage_storage_class: default
   file_storage_access_mode: "ReadWriteMany"
   file_storage_size: "50Gi"
-  file_storage_storage_class: default
+ 
 EOF
 ```
 
