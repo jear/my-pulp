@@ -29,7 +29,6 @@ spec:
     replicas: 1
 
   database:
-    enabled: true
     postgres_storage_class: rook-ceph-block
 
 #  file_storage_storage_class: my-sc-for-pulpcore
