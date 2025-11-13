@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pulp-internal
+  namespace: pulp
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`pulp.gpu02.lysdemolab.fr`)
+    middlewares:
+#    - name: security
+#    - name: ratelimit
+    services:
+    - name: pulp-web-svc
+      port: 24880
+  tls:
+    certResolver: letsencrypt
