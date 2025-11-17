@@ -10,6 +10,10 @@ helm -n pulp install pulp pulp-operator/pulp-operator
 
 k apply -f my-pulp.yaml
 
+k get secret -n pulp pulp-admin-password -o jsonpath="{.data.password}" | base64 --decode
+
+pulp config create --username admin --base-url https://pulp.gpu02.lysdemolab.fr --password XXXXXXXXXXXXXXXXXXXXXXXXXXXX --overwrite
+
 
 ```
 
