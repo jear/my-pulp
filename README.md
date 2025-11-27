@@ -208,7 +208,10 @@ Done.
   "signing_service": null
 }
 
+# Create distribution
+pulp  --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE --base-path UBUNTU_2404_NOBLE --publication /pulp/api/v3/publications/deb/apt/019ac614-1943-78c4-8422-c0639f601d65/
 
+# update publication
 pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE  --publication  /pulp/api/v3/publications/deb/verbatim/019ac614-1943-78c4-8422-c0639f601d65/
 
 
