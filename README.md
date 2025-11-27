@@ -77,9 +77,7 @@ pulp  --no-verify-ssl file distribution show --name  hpe_latest
 }
 ```
 
-
-
-# Client side ( use external endpoint )
+# Client side : use external endpoint 
 ```
 # get your file
 wget  .... https://pulp.83-206-89-105.nip.io/pulp/content/file/hpe/morpheus-appliance_8.0.9-1_amd64.deb
@@ -93,3 +91,8 @@ pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io
 
 ```
 
+# my-pulp Ubuntu 
+https://discourse.pulpproject.org/t/ubuntu-supported/1173/2
+```
+
+```
