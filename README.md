@@ -80,7 +80,7 @@ pulp  --no-verify-ssl file distribution show --name  hpe_latest
 # Client side : use external endpoint 
 ```
 # get your file
-wget  .... https://pulp.83-206-89-105.nip.io/pulp/content/file/hpe/morpheus-appliance_8.0.9-1_amd64.deb
+curl -o morpheus-appliance_8.0.9-1_amd64.deb  https://pulp.83-206-89-105.nip.io/pulp/content/file/hpe/morpheus-appliance_8.0.9-1_amd64.deb
 
 # set Pulp if necesserary
 
@@ -92,6 +92,8 @@ pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io
 ```
 
 # my-pulp Ubuntu 24.04
+https://pulpproject.org/pulp_deb/docs/user/guides/sync/
+https://discourse.pulpproject.org/t/ubuntu-supported/1173/6
 ```
 pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
 ()
