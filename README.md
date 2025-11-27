@@ -94,15 +94,29 @@ pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io
 # my-pulp Ubuntu 
 https://discourse.pulpproject.org/t/ubuntu-supported/1173/2
 ```
+pulp deb remote create --name UBUNTU_2204_JAMMY --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution jammy --architecture amd64  | jq -C
+pulp deb repository create --name UBUNTU_2204_JAMMY --remote UBUNTU_2204_JAMMY --retain-repo-versions 3  | jq -C
+pulp deb repository sync  --name UBUNTU_2204_JAMMY --mirror
+pulp deb publication --type verbatim create --repository UBUNTU_2204_JAMMY
+pulp deb distribution create --name UBUNTU_2204_JAMMY_TEST --base-path UBUNTU_2204_JAMMY_TEST --publication /pulp/api/v3/publications/deb/verbatim/018e80b2-b33e-7b3e-b9e4-7195736c3c08/
+
 pulp deb remote update --name UBUNTU_2204_JAMMY \
   --distribution jammy \
   --distribution jammy-security \
   --distribution jammy-backports \
   --distribution jammy-updates
 
+pulp deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
+pulp deb repository create --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 3  | jq -C
+pulp deb repository sync  --name UBUNTU_2404_NOBLE --mirror
+pulp deb publication --type verbatim create --repository UBUNTU_2204_NOBLE
+pulp deb distribution create --name UBUNTU_2404_NOBLE_TEST --base-path UBUNTU_2404_NOBLE_TEST --publication /pulp/api/v3/publications/deb/verbatim/018e80b2-b33e-7b3e-b9e4-7195736c3c08/  
+
 pulp deb remote update --name UBUNTU_2404_NOBLE \
   --distribution noble \
   --distribution noble-security \
   --distribution noble-backports \
   --distribution noble-updates
+
+
 ```
