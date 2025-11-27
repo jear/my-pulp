@@ -106,13 +106,13 @@ pulp deb remote update --name UBUNTU_2204_JAMMY \
   --distribution jammy-backports \
   --distribution jammy-updates
 
-pulp deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
-pulp deb repository create --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 3  | jq -C
-pulp deb repository sync  --name UBUNTU_2404_NOBLE --mirror
-pulp deb publication --type verbatim create --repository UBUNTU_2204_NOBLE
-pulp deb distribution create --name UBUNTU_2404_NOBLE_TEST --base-path UBUNTU_2404_NOBLE_TEST --publication /pulp/api/v3/publications/deb/verbatim/018e80b2-b33e-7b3e-b9e4-7195736c3c08/  
+pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
+pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 3  | jq -C
+pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
+pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2204_NOBLE
+pulp --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE_TEST --base-path UBUNTU_2404_NOBLE_TEST --publication /pulp/api/v3/publications/deb/verbatim/018e80b2-b33e-7b3e-b9e4-7195736c3c08/  
 
-pulp deb remote update --name UBUNTU_2404_NOBLE \
+pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
   --distribution noble \
   --distribution noble-security \
   --distribution noble-backports \
