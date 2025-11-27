@@ -1,4 +1,4 @@
-# my-pulp
+# my-pulp install in k8s
 
 https://pulpproject.org/pulp-operator/docs/admin/guides/install/helm/
 
@@ -11,7 +11,10 @@ helm -n pulp install pulp pulp-operator/pulp-operator
 k apply -f my-pulp.yaml
 
 k get secret -n pulp pulp-admin-password -o jsonpath="{.data.password}" | base64 --decode
+```
 
+# my-pulp CLI install 
+```
 # install Pulp python  CLI on server and client
 conda activate my-tasks
 pip install pulp-cli[pygments]
@@ -19,7 +22,10 @@ pip install pulp-cli[pygments]
 
 # Server side  ( use internal endpoint )
 pulp config create --username admin --base-url https://pulp.gpu02.lysdemolab.fr --password XXXXXXXXXXXXXXXXXXXXXXXXXXXX --overwrite
+```
 
+# Pulp File Repo
+```
 # pulp file repo with autopublish
 pulp  --no-verify-ssl file repository create   --name hpe  --autopublish
 
@@ -69,12 +75,12 @@ pulp  --no-verify-ssl file distribution show --name  hpe_latest
   "publication": null,
   "checkpoint": false
 }
-
+```
 
 
 
 # Client side ( use external endpoint )
-
+```
 # get your file
 wget  .... https://pulp.83-206-89-105.nip.io/pulp/content/file/hpe/morpheus-appliance_8.0.9-1_amd64.deb
 
@@ -84,9 +90,6 @@ conda activate my-tasks
 pip install pulp-cli[pygments]
 
 pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io --password XXXXXXXXXXXXXXXXXXXXXXXXXXXX --overwrite
-
-
-
 
 ```
 
