@@ -94,5 +94,15 @@ pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io
 # my-pulp Ubuntu 
 https://discourse.pulpproject.org/t/ubuntu-supported/1173/2
 ```
+pulp deb remote update --name UBUNTU_2204_JAMMY \
+  --distribution jammy \
+  --distribution jammy-security \
+  --distribution jammy-backports \
+  --distribution jammy-updates
 
+pulp deb remote update --name UBUNTU_2404_NOBLE \
+  --distribution noble \
+  --distribution noble-security \
+  --distribution noble-backports \
+  --distribution noble-updates
 ```
