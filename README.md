@@ -193,15 +193,16 @@ pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
 
 # create publication
 #pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2404_NOBLE
+
 pulp --no-verify-ssl deb publication --type apt create --repository UBUNTU_2404_NOBLE
-Started background task /pulp/api/v3/tasks/019ac614-18e5-7c7e-a833-d6be34acdd79/
-Done.
+Started background task /pulp/api/v3/tasks/019ac64f-c1c5-7225-9816-c4703c2e1fd6/
+...................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................Done.
 {
-  "pulp_href": "/pulp/api/v3/publications/deb/apt/019ac614-1943-78c4-8422-c0639f601d65/",
-  "prn": "prn:deb.aptpublication:019ac614-1943-78c4-8422-c0639f601d65",
-  "pulp_created": "2025-11-27T16:09:57.317289Z",
-  "pulp_last_updated": "2025-11-27T16:09:57.338235Z",
-  "repository_version": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/versions/0/",
+  "pulp_href": "/pulp/api/v3/publications/deb/apt/019ac660-6886-7b3b-9ae9-526bc1476499/",
+  "prn": "prn:deb.aptpublication:019ac660-6886-7b3b-9ae9-526bc1476499",
+  "pulp_created": "2025-11-27T17:33:18.343694Z",
+  "pulp_last_updated": "2025-11-27T17:41:32.648953Z",
+  "repository_version": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/versions/1/",
   "repository": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/",
   "simple": false,
   "structured": true,
@@ -210,10 +211,28 @@ Done.
 }
 
 # Create distribution
-pulp  --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE --base-path UBUNTU_2404_NOBLE --publication /pulp/api/v3/publications/deb/apt/019ac614-1943-78c4-8422-c0639f601d65/
+pulp  --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE --base-path UBUNTU_2404_NOBLE --publication /pulp/api/v3/publications/deb/apt/019ac660-6886-7b3b-9ae9-526bc1476499/
+Started background task /pulp/api/v3/tasks/019ac66e-b9ae-71fb-a5cd-943beeab9615/
+.Done.
+{
+  "pulp_href": "/pulp/api/v3/distributions/deb/apt/019ac66e-bdb2-7793-8a52-399043b4c507/",
+  "prn": "prn:deb.aptdistribution:019ac66e-bdb2-7793-8a52-399043b4c507",
+  "pulp_created": "2025-11-27T17:48:57.651775Z",
+  "pulp_last_updated": "2025-11-27T17:48:57.651791Z",
+  "base_path": "UBUNTU_2404_NOBLE",
+  "base_url": "http://pulp-web-svc.pulp.svc.cluster.local:24880/pulp/content/UBUNTU_2404_NOBLE/",
+  "content_guard": null,
+  "no_content_change_since": "2025-11-27T17:48:57.651791Z",
+  "hidden": false,
+  "pulp_labels": {},
+  "name": "UBUNTU_2404_NOBLE",
+  "repository": null,
+  "publication": "/pulp/api/v3/publications/deb/apt/019ac660-6886-7b3b-9ae9-526bc1476499/",
+  "checkpoint": false
+}
 
 # update publication
-pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE  --publication  /pulp/api/v3/publications/deb/verbatim/019ac614-1943-78c4-8422-c0639f601d65/
+pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE  --publication  /pulp/api/v3/publications/deb/apt/019ac660-6886-7b3b-9ae9-526bc1476499/
 
 
 
