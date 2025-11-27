@@ -96,6 +96,7 @@ pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io
 - https://pulpproject.org/pulp_deb/docs/user/guides/sync/#important-apt-remote-flags
 - https://discourse.pulpproject.org/t/ubuntu-supported/1173/6
 ```
+# Create deb remote
 pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
 ()
 {
@@ -151,6 +152,7 @@ pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://arc
   "ignore_missing_package_indices": false
 }
 
+# create deb repo
 pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 3  | jq -C
 {
   "pulp_href": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/",
@@ -170,19 +172,25 @@ pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBU
   "signing_service_release_overrides": {}
 }
 
-#pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
-#pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2204_NOBLE
-#pulp --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE_TEST --base-path UBUNTU_2404_NOBLE_TEST --publication /pulp/api/v3/publications/deb/verbatim/018e80b2-b33e-7b3e-b9e4-7195736c3c08/  
+# Sync/Mirror
+pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
+Started background task /pulp/api/v3/tasks/019ac62c-9393-7b02-96c1-f849c4ae85fe/
+...............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................Done.
 
+# if you Ctrl-C during the sync, it sends tasks to background
+pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
+Started background task /pulp/api/v3/tasks/019ac64c-91a7-789c-b387-0d80172a3bf9/
+..................................Task /pulp/api/v3/tasks/019ac64c-91a7-789c-b387-0d80172a3bf9/ sent to background.
 
+# deb remote update
 pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
   --distribution noble \
   --distribution noble-security \
   --distribution noble-backports \
   --distribution noble-updates
 
-pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
 
+# create publication
 #pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2404_NOBLE
 pulp --no-verify-ssl deb publication --type apt create --repository UBUNTU_2404_NOBLE
 Started background task /pulp/api/v3/tasks/019ac614-18e5-7c7e-a833-d6be34acdd79/
