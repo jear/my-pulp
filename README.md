@@ -51,6 +51,25 @@ pulp --no-verify-ssl file distribution create \
   --repository file:file:hpe \
   --base-path file/hpe
 
+# Check
+pulp  --no-verify-ssl file distribution show --name  hpe_latest
+{
+  "pulp_href": "/pulp/api/v3/distributions/file/file/019ac45b-b6d6-7999-bc3f-12806c7147e6/",
+  "prn": "prn:file.filedistribution:019ac45b-b6d6-7999-bc3f-12806c7147e6",
+  "pulp_created": "2025-11-27T08:08:56.279226Z",
+  "pulp_last_updated": "2025-11-27T08:08:56.279239Z",
+  "base_path": "file/hpe",
+  "base_url": "http://pulp-web-svc.pulp.svc.cluster.local:24880/pulp/content/file/hpe/",
+  "content_guard": null,
+  "no_content_change_since": null,
+  "hidden": false,
+  "pulp_labels": {},
+  "name": "hpe_latest",
+  "repository": "/pulp/api/v3/repositories/file/file/019ac44b-e57c-7fd7-b10b-29261ec34d06/",
+  "publication": null,
+  "checkpoint": false
+}
+
 
 # Client side ( use external endpoint )
 conda activate my-tasks
