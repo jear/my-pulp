@@ -91,7 +91,115 @@ pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io
 
 ```
 
-# my-pulp Ubuntu 
+# my-pulp Ubuntu 24.04
+```
+pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
+()
+{
+  "pulp_href": "/pulp/api/v3/remotes/deb/apt/019ac607-173e-7634-b0d9-588c4c955e43/",
+  "prn": "prn:deb.aptremote:019ac607-173e-7634-b0d9-588c4c955e43",
+  "pulp_created": "2025-11-27T15:55:44.831738Z",
+  "pulp_last_updated": "2025-11-27T15:55:44.831753Z",
+  "name": "UBUNTU_2404_NOBLE",
+  "url": "http://archive.ubuntu.com/ubuntu/",
+  "ca_cert": null,
+  "client_cert": null,
+  "tls_validation": true,
+  "proxy_url": null,
+  "pulp_labels": {},
+  "download_concurrency": null,
+  "max_retries": null,
+  "policy": "on_demand",
+  "total_timeout": null,
+  "connect_timeout": null,
+  "sock_connect_timeout": null,
+  "sock_read_timeout": null,
+  "headers": null,
+  "rate_limit": null,
+  "hidden_fields": [
+    {
+      "name": "client_key",
+      "is_set": false
+    },
+    {
+      "name": "proxy_username",
+      "is_set": false
+    },
+    {
+      "name": "proxy_password",
+      "is_set": false
+    },
+    {
+      "name": "username",
+      "is_set": false
+    },
+    {
+      "name": "password",
+      "is_set": false
+    }
+  ],
+  "distributions": "noble",
+  "components": null,
+  "architectures": "amd64",
+  "sync_sources": false,
+  "sync_udebs": false,
+  "sync_installer": false,
+  "gpgkey": null,
+  "ignore_missing_package_indices": false
+}
+
+pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 3  | jq -C
+{
+  "pulp_href": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/",
+  "prn": "prn:deb.aptrepository:019ac608-0c06-7b63-bc5e-979c7996dd29",
+  "pulp_created": "2025-11-27T15:56:47.496274Z",
+  "pulp_last_updated": "2025-11-27T15:56:47.509045Z",
+  "versions_href": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/versions/",
+  "pulp_labels": {},
+  "latest_version_href": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/versions/0/",
+  "name": "UBUNTU_2404_NOBLE",
+  "description": null,
+  "retain_repo_versions": 3,
+  "remote": "/pulp/api/v3/remotes/deb/apt/019ac607-173e-7634-b0d9-588c4c955e43/",
+  "autopublish": false,
+  "publish_upstream_release_fields": true,
+  "signing_service": null,
+  "signing_service_release_overrides": {}
+}
+
+#pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
+#pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2204_NOBLE
+#pulp --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE_TEST --base-path UBUNTU_2404_NOBLE_TEST --publication /pulp/api/v3/publications/deb/verbatim/018e80b2-b33e-7b3e-b9e4-7195736c3c08/  
+
+
+pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
+  --distribution noble \
+  --distribution noble-security \
+  --distribution noble-backports \
+  --distribution noble-updates
+
+pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
+
+pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2404_NOBLE 
+Started background task /pulp/api/v3/tasks/019ac60f-4880-7af8-974c-156ba1d06c81/
+Done.
+{
+  "pulp_href": "/pulp/api/v3/publications/deb/verbatim/019ac60f-48d4-7d4b-a9d4-4ad12835fbf0/",
+  "prn": "prn:deb.verbatimpublication:019ac60f-48d4-7d4b-a9d4-4ad12835fbf0",
+  "pulp_created": "2025-11-27T16:04:41.813706Z",
+  "pulp_last_updated": "2025-11-27T16:04:41.829243Z",
+  "repository_version": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/versions/0/",
+  "repository": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/"
+}
+
+pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE  --publication  /pulp/api/v3/publications/deb/verbatim/019ac60f-48d4-7d4b-a9d4-4ad12835fbf0/
+
+
+pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE_TEST  --publication  /pulp/api/v3/publications/deb/verbatim/019ac60f-48d4-7d4b-a9d4-4ad12835fbf0/
+
+```
+
+# my-pulp Ubuntu 22.04
 https://discourse.pulpproject.org/t/ubuntu-supported/1173/2
 ```
 pulp deb remote create --name UBUNTU_2204_JAMMY --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution jammy --architecture amd64  | jq -C
@@ -105,18 +213,6 @@ pulp deb remote update --name UBUNTU_2204_JAMMY \
   --distribution jammy-security \
   --distribution jammy-backports \
   --distribution jammy-updates
-
-pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
-pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 3  | jq -C
-pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
-pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2204_NOBLE
-pulp --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE_TEST --base-path UBUNTU_2404_NOBLE_TEST --publication /pulp/api/v3/publications/deb/verbatim/018e80b2-b33e-7b3e-b9e4-7195736c3c08/  
-
-pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
-  --distribution noble \
-  --distribution noble-security \
-  --distribution noble-backports \
-  --distribution noble-updates
-
-
 ```
+
+
