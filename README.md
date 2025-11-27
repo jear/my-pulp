@@ -71,13 +71,21 @@ pulp  --no-verify-ssl file distribution show --name  hpe_latest
 }
 
 
+
+
 # Client side ( use external endpoint )
+
+# get your file
+wget  .... https://pulp.83-206-89-105.nip.io/pulp/content/file/hpe/morpheus-appliance_8.0.9-1_amd64.deb
+
+# set Pulp if necesserary
+
 conda activate my-tasks
 pip install pulp-cli[pygments]
 
 pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io --password XXXXXXXXXXXXXXXXXXXXXXXXXXXX --overwrite
 
-# https://pulpproject.org/pulp_file/docs/user/guides/publish-host/
+
 
 
 ```
