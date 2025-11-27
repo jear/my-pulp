@@ -92,7 +92,7 @@ pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io
 ```
 
 # my-pulp Ubuntu 24.04
-- https://pulpproject.org/pulp_deb/docs/user/guides/sync/
+- https://pulpproject.org/pulp_deb/docs/user/guides/sync/#repository-synchronization
 - https://pulpproject.org/pulp_deb/docs/user/guides/sync/#important-apt-remote-flags
 - https://discourse.pulpproject.org/t/ubuntu-supported/1173/6
 ```
