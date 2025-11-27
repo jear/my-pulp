@@ -56,8 +56,9 @@ pulp --no-verify-ssl file distribution create \
 conda activate my-tasks
 pip install pulp-cli[pygments]
 
-# Server side  ( use internal endpoint )
 pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io --password XXXXXXXXXXXXXXXXXXXXXXXXXXXX --overwrite
+
+# https://pulpproject.org/pulp_file/docs/user/guides/publish-host/
 
 
 ```
