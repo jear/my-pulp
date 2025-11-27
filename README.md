@@ -180,22 +180,27 @@ pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
 
 pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
 
-pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2404_NOBLE 
-Started background task /pulp/api/v3/tasks/019ac60f-4880-7af8-974c-156ba1d06c81/
+#pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2404_NOBLE
+pulp --no-verify-ssl deb publication --type apt create --repository UBUNTU_2404_NOBLE
+Started background task /pulp/api/v3/tasks/019ac614-18e5-7c7e-a833-d6be34acdd79/
 Done.
 {
-  "pulp_href": "/pulp/api/v3/publications/deb/verbatim/019ac60f-48d4-7d4b-a9d4-4ad12835fbf0/",
-  "prn": "prn:deb.verbatimpublication:019ac60f-48d4-7d4b-a9d4-4ad12835fbf0",
-  "pulp_created": "2025-11-27T16:04:41.813706Z",
-  "pulp_last_updated": "2025-11-27T16:04:41.829243Z",
+  "pulp_href": "/pulp/api/v3/publications/deb/apt/019ac614-1943-78c4-8422-c0639f601d65/",
+  "prn": "prn:deb.aptpublication:019ac614-1943-78c4-8422-c0639f601d65",
+  "pulp_created": "2025-11-27T16:09:57.317289Z",
+  "pulp_last_updated": "2025-11-27T16:09:57.338235Z",
   "repository_version": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/versions/0/",
-  "repository": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/"
+  "repository": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/",
+  "simple": false,
+  "structured": true,
+  "checkpoint": false,
+  "signing_service": null
 }
 
-pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE  --publication  /pulp/api/v3/publications/deb/verbatim/019ac60f-48d4-7d4b-a9d4-4ad12835fbf0/
+
+pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE  --publication  /pulp/api/v3/publications/deb/verbatim/019ac614-1943-78c4-8422-c0639f601d65/
 
 
-pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE_TEST  --publication  /pulp/api/v3/publications/deb/verbatim/019ac60f-48d4-7d4b-a9d4-4ad12835fbf0/
 
 ```
 
