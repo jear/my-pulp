@@ -46,13 +46,18 @@ Started background task /pulp/api/v3/tasks/019ac458-8653-76a9-a783-a3d4e151a51e/
 }
 
 # Create a Distribution for 'hpe'
-pulp file distribution create \
+pulp --no-verify-ssl file distribution create \
   --name hpe_latest \
   --repository file:file:hpe \
   --base-path file/hpe
 
 
 # Client side ( use external endpoint )
+conda activate my-tasks
+pip install pulp-cli[pygments]
+
+# Server side  ( use internal endpoint )
+pulp config create --username admin --base-url https://pulp.83-206-89-105.nip.io --password XXXXXXXXXXXXXXXXXXXXXXXXXXXX --overwrite
 
 
 ```
