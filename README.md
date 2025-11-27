@@ -231,7 +231,7 @@ Started background task /pulp/api/v3/tasks/019ac66e-b9ae-71fb-a5cd-943beeab9615/
   "checkpoint": false
 }
 
-# update publication
+# update distribution
 pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE  --publication  /pulp/api/v3/publications/deb/apt/019ac660-6886-7b3b-9ae9-526bc1476499/
 
 
