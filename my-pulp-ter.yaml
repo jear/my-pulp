@@ -1,8 +1,8 @@
 apiVersion: repo-manager.pulpproject.org/v1
 kind: Pulp
 metadata:
-  name: pulp
-  namespace: pulp
+  name: pulp-ter
+  namespace: pulp-ter
 spec:
   allowed_content_checksums: ["sha1", "sha256", "sha384", "sha512"]
   api:
