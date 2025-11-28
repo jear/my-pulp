@@ -2,6 +2,8 @@
 
 https://pulpproject.org/pulp-operator/docs/admin/guides/install/helm/
 
+https://pulpproject.org/pulp_python/restapi/#tag/Repositories:-Python
+
 ```
 helm repo add pulp-operator https://github.com/pulp/pulp-k8s-resources/raw/main/helm-charts/ --force-update
 kubectl create ns pulp
