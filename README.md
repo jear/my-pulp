@@ -77,13 +77,12 @@ pulp  --no-verify-ssl file distribution show --name  hpe_latest
 }
 ```
 
-#  use external endpoint ( the cert is  signed, no need to  use --no-verify-ssl :-) ) 
+#  Test using  external endpoint ( the cert is  signed, no need to  use --no-verify-ssl :-) ) 
 ```
 # get your file
 curl -o morpheus-appliance_8.0.9-1_amd64.deb  https://pulp.83-206-89-105.nip.io/pulp/content/file/hpe/morpheus-appliance_8.0.9-1_amd64.deb
 
-# set Pulp if necesserary
-
+# set Pulp if necesserary with external endpoint
 conda activate my-tasks
 pip install pulp-cli[pygments]
 
