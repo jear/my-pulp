@@ -20,7 +20,7 @@ conda activate my-tasks
 pip install pulp-cli[pygments]
 
 
-# using internal endpoint 
+# using internal endpoint ( the cert is not signed, please use --no-verify-ssl  ) 
 pulp config create --username admin --base-url https://pulp.gpu02.lysdemolab.fr --password XXXXXXXXXXXXXXXXXXXXXXXXXXXX --overwrite
 ```
 
@@ -77,7 +77,7 @@ pulp  --no-verify-ssl file distribution show --name  hpe_latest
 }
 ```
 
-#  use external endpoint 
+#  use external endpoint ( the cert is  signed, no need to  use --no-verify-ssl :-) ) 
 ```
 # get your file
 curl -o morpheus-appliance_8.0.9-1_amd64.deb  https://pulp.83-206-89-105.nip.io/pulp/content/file/hpe/morpheus-appliance_8.0.9-1_amd64.deb
