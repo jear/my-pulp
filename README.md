@@ -238,6 +238,66 @@ pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE_TEST  --pu
 
 ```
 
+# Test
+
+```
+
+jear@pulp-ubuntu-repo-test:~$ cat  /etc/apt/sources.list.d/ubuntu.sources
+Types: deb
+Trusted: Yes
+URIs: http://10.69.41.86:24880/pulp/content/UBUNTU_2404_NOBLE/
+Suites: noble noble-updates noble-backports
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+Trusted: Yes
+URIs: http://10.69.41.86:24880/pulp/content/UBUNTU_2404_NOBLE/
+Suites: noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+sudo apt update
+sudo apt upgrade
+
+sudo reboot
+
+
+jear@pulp-ubuntu-repo-test:~$ sudo apt install net-tools
+[sudo] password for jear:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  net-tools
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 204 kB of archives.
+After this operation, 811 kB of additional disk space will be used.
+Get:1 http://10.69.41.86:24880/pulp/content/UBUNTU_2404_NOBLE noble-updates/main amd64 net-tools amd64 2.10-0.1ubuntu4.4 [204 kB]
+Fetched 204 kB in 2s (85.9 kB/s)
+Selecting previously unselected package net-tools.
+(Reading database ... 143732 files and directories currently installed.)
+Preparing to unpack .../net-tools_2.10-0.1ubuntu4.4_amd64.deb ...
+Unpacking net-tools (2.10-0.1ubuntu4.4) ...
+Setting up net-tools (2.10-0.1ubuntu4.4) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Scanning processes...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+
+```
+
+
 # my-pulp Ubuntu 22.04
 https://discourse.pulpproject.org/t/ubuntu-supported/1173/2
 ```
