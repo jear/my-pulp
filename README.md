@@ -190,7 +190,7 @@ pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
   --distribution noble-updates
 
 
-# create publication
+# create publication ( see bug using verbatim type... use apt type instead )
 #pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2404_NOBLE
 
 pulp --no-verify-ssl deb publication --type apt create --repository UBUNTU_2404_NOBLE
