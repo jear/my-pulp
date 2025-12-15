@@ -22,6 +22,9 @@ k get secret -n pulp pulp-admin-password -o jsonpath="{.data.password}" | base64
 # install Pulp python  CLI on server and client
 conda activate my-tasks
 pip install pulp-cli[pygments]
+pip install pulp-cli-deb
+pip install pulp-cli-deb httpie
+
 
 
 # using internal endpoint ( the cert is not signed, please use --no-verify-ssl  ) 
