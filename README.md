@@ -179,6 +179,10 @@ pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBU
   "signing_service_release_overrides": {}
 }
 
+# update deb repo
+pulp --no-verify-ssl deb repository update --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 1
+
+
 # Sync/Mirror
 pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
 Started background task /pulp/api/v3/tasks/019ac62c-9393-7b02-96c1-f849c4ae85fe/
