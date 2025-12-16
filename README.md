@@ -249,6 +249,11 @@ pulp --no-verify-ssl deb distribution update --name UBUNTU_2404_NOBLE_TEST  --pu
 
 ```
 
+# Destroy
+```
+
+```
+
 # Test
 
 ```
@@ -308,6 +313,45 @@ No VM guests are running outdated hypervisor (qemu) binaries on this host.
 
 ```
 
+```
+#!/bin/bash
+
+set -eu
+
+pulp file repository destroy --name test_delete_versions || true
+pulp file repository create --name test_delete_versions
+
+for NAME in "aaaa" "bbbb" "cccc" "dddd" "eeee" "ffff" "gggg" "hhhh" "jjjj"
+do
+  echo "$NAME" > "$NAME"
+  pulp file content upload --relative-path "$NAME" --file "$NAME" || true
+  declare $NAME='{"sha256": "'"$(sha256sum --binary $NAME | cut -d" " -f1)"'", "relative_path": "'"$NAME"'"}'
+done
+
+pulp file repository content modify --repository test_delete_versions --add-content '['"$aaaa"', '"$bbbb"', '"$cccc"', '"$dddd"', '"$eeee"']'
+pulp file repository content modify --repository test_delete_versions --remove-content '['"$bbbb"', '"$cccc"', '"$dddd"', '"$eeee"']' --add-content '['"$ffff"', '"$gggg"', '"$hhhh"', '"$jjjj"']'
+pulp file repository content modify --repository test_delete_versions --remove-content '['"$gggg"', '"$jjjj"']' --add-content '['"$cccc"', '"$dddd"']'
+pulp file repository content modify --repository test_delete_versions --remove-content '['"$dddd"', '"$hhhh"']' --add-content '['"$eeee"', '"$jjjj"']'
+
+pulp file repository version list --repository test_delete_versions
+# pulp file repository content list --repository test_delete_versions
+
+pulp file repository version destroy --repository test_delete_versions --version 2
+pulp file repository version list --repository test_delete_versions
+
+if [ ! "$(pulp file repository content list --repository test_delete_versions --version 1 | jq -r '.[].relative_path' | sort)" = $'aaaa\nbbbb\ncccc\ndddd\neeee' ]
+then
+  echo Version 1 is wrong.
+fi
+if [ ! "$(pulp file repository content list --repository test_delete_versions --version 3 | jq -r '.[].relative_path' | sort)" = $'aaaa\ncccc\ndddd\nffff\nhhhh' ]
+then
+  echo Version 3 is wrong.
+fi
+if [ ! "$(pulp file repository content list --repository test_delete_versions --version 4 | jq -r '.[].relative_path' | sort)" = $'aaaa\ncccc\neeee\nffff\njjjj' ]
+then
+  echo Version 4 is wrong.
+fi
+```
 
 # my-pulp Ubuntu 22.04
 https://discourse.pulpproject.org/t/ubuntu-supported/1173/2
