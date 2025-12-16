@@ -37,6 +37,11 @@ pulp config create --username admin --base-url https://pulp.gpu02.lysdemolab.fr 
 https://pulpproject.org/pulpcore/docs/admin/guides/sign-metadata/
 ```
 
+# Reclaim Disk space
+```
+https://pulpproject.org/pulpcore/docs/user/guides/reclaim-disk-space/
+```
+
 
 # Pulp File Repo
 ```
