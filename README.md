@@ -179,6 +179,9 @@ pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBU
   "signing_service_release_overrides": {}
 }
 
+# Check how many version of the deb repo
+pulp deb repository version list --repository UBUNTU_2404_NOBLE
+
 # update deb repo
 pulp --no-verify-ssl deb repository update --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 1
 
