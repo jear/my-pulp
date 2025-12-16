@@ -31,6 +31,13 @@ pip install pulp-cli-deb httpie
 pulp config create --username admin --base-url https://pulp.gpu02.lysdemolab.fr --password XXXXXXXXXXXXXXXXXXXXXXXXXXXX --overwrite
 ```
 
+
+# Sign metadata 
+```
+https://pulpproject.org/pulpcore/docs/admin/guides/sign-metadata/
+```
+
+
 # Pulp File Repo
 ```
 # pulp file repo with autopublish
@@ -183,7 +190,9 @@ pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBU
 pulp deb repository version list --repository UBUNTU_2404_NOBLE
 
 # update deb repo
+# Just to add to this, if you are sure you are not interested in the older repository versions (history), you can set retain_repo_versions=1 on the repository. It will then automatically delete all but the latest version.
 pulp --no-verify-ssl deb repository update --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 1
+
 
 
 # Sync/Mirror
