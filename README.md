@@ -2,6 +2,8 @@
 
 https://pulpproject.org/pulp-operator/docs/admin/guides/install/helm/
 
+https://pulpproject.org/pulp-oci-images/docs/admin/guides/configure-signing-service/
+
 https://pulpproject.org/pulp_python/restapi/#tag/Repositories:-Python
 
 Note for Dev : https://pulp.plan.io/
