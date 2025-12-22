@@ -301,6 +301,9 @@ sudo apt upgrade
 
 sudo reboot
 
+# notes
+deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main
+
 
 jear@pulp-ubuntu-repo-test:~$ sudo apt install net-tools
 [sudo] password for jear:
