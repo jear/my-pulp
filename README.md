@@ -223,7 +223,9 @@ pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
 # create publication ( see bug using verbatim type... use apt type instead )
 
 pulp --no-verify-ssl deb publication                 create --repository UBUNTU_2404_NOBLE
+or
 pulp --no-verify-ssl deb publication --type verbatim create --repository UBUNTU_2404_NOBLE
+or
 pulp --no-verify-ssl deb publication --type apt      create --repository UBUNTU_2404_NOBLE
 
 Started background task /pulp/api/v3/tasks/019ac64f-c1c5-7225-9816-c4703c2e1fd6/
