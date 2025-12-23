@@ -173,8 +173,14 @@ pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://arc
   "ignore_missing_package_indices": false
 }
 
+# Noble security
+pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE_SECURITY --url http://security.ubuntu.com/ubuntu/ --policy on_demand --distribution noble-security --architecture amd64  | jq -C
+pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE_SECURITY --remote UBUNTU_2404_NOBLE_SECURITY --retain-repo-versions 1  | jq -C
+pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE_SECURITY --mirror
+
+
 # create deb repo
-pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 3  | jq -C
+pulp --no-verify-ssl deb repository create --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 1  | jq -C
 {
   "pulp_href": "/pulp/api/v3/repositories/deb/apt/019ac608-0c06-7b63-bc5e-979c7996dd29/",
   "prn": "prn:deb.aptrepository:019ac608-0c06-7b63-bc5e-979c7996dd29",
@@ -215,7 +221,6 @@ Started background task /pulp/api/v3/tasks/019ac64c-91a7-789c-b387-0d80172a3bf9/
 # deb remote update
 pulp --no-verify-ssl deb remote update --name UBUNTU_2404_NOBLE \
   --distribution noble \
-  --distribution noble-security \
   --distribution noble-backports \
   --distribution noble-updates
 
