@@ -1,0 +1,58 @@
+UBUNTU_URL=http://ch.archive.ubuntu.com/ubuntu/
+REPOS_L=(
+...
+    "focal;--url ${UBUNTU_URL} --distribution=focal;os/focal"
+    "focal-updates;--url ${UBUNTU_URL} --distribution=focal-updates;os/focal"
+    "focal-security;--url ${UBUNTU_URL} --distribution=focal-security;os/focal"
+...
+)
+
+DEFAULT_REMOTE_OPTIONS=( --architecture=amd64 --policy immediate --tls-validation False )
+
+SIGNING_SERVICE_NAME='PulpQE'
+POETRYRUN='poetry run'
+
+...
+CreateRepo()
+{
+BACKUPIFS=$IFS
+for r in "${REPOS_L[@]}";do
+    IFS=";" read -r -a r <<< "$r"
+    REPO_NAME="${r[0]}"
+    URL="${r[1]}"
+    BASEPATH="${r[2]}"
+
+    echo "# Create remote for $REPO_NAME #"
+    $POETRYRUN pulp deb remote create --name $REPO_NAME \
+    $URL \
+    ${DEFAULT_REMOTE_OPTIONS[@]} | jq -C
+    check
+
+    echo "# Create repository for $REPO_NAME repo and on remote $REPO_NAME #"
+    $POETRYRUN pulp deb repository create --name=$REPO_NAME \
+    --description $REPO_NAME \
+    --remote $REPO_NAME | jq -C
+    check
+
+    echo "# Sync $REPO_NAME repo #"
+    $POETRYRUN pulp deb repository sync --name $REPO_NAME | jq -C
+    check
+
+    echo "# Create publication  for $REPO_NAME repo #"
+    PULP_HREF_CURR=$($POETRYRUN pulp deb publication --type apt create --repository $REPO_NAME \
+    --signing-service=${SIGNING_SERVICE_NAME} | jq -r .pulp_href)
+    check
+
+    echo "# Create a distribution attached to the last reference for ${REPO_NAME}_Snap repo on publication ${PULP_HREF_CURR} #"
+    $POETRYRUN pulp deb distribution create --name "${REPO_NAME}_Snap" \
+    --base-path "${BASEPATH}/${REPO_NAME}_Snap" --publication ${PULP_HREF_CURR} | jq -C
+    check
+
+    echo "# Create a distribution attached to the last reference for $REPO_NAME repo on publication ${PULP_HREF_CURR} #"
+    $POETRYRUN pulp deb distribution create --name $REPO_NAME \
+    --base-path "${BASEPATH}/${REPO_NAME}" --publication ${PULP_HREF_CURR} | jq -C
+    check
+
+done
+IFS=$BACKUPIFS
+}
