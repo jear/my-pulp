@@ -3,11 +3,36 @@
 # TL;DR
 ```
 pulp config create --username admin --base-url http://10.180.10.128:24880 --password XXXXXXXXXXXXXXXXX --overwrite
-pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
-pulp --no-verify-ssl deb repository update --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 1  | jq -C
-pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
-pulp --no-verify-ssl deb publication --type apt      create --repository UBUNTU_2404_NOBLE
-pulp --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE --base-path UBUNTU_2404_NOBLE --publication <H_REF>
+
+REPO_NAME=UBUNTU_2404_NOBLE
+pulp --no-verify-ssl deb remote create --name ${REPO_NAME} --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
+pulp --no-verify-ssl deb repository update --name ${REPO_NAME} --remote ${REPO_NAME} --retain-repo-versions 1  | jq -C
+pulp --no-verify-ssl deb repository sync  --name ${REPO_NAME} --mirror
+PULP_HREF_CURR=$(pulp --no-verify-ssl deb publication --type apt create --repository ${REPO_NAME} | jq -r .pulp_href)
+pulp --no-verify-ssl deb distribution create --name ${REPO_NAME} --base-path ${REPO_NAME} --publication ${PULP_HREF_CURR}  | jq -C
+
+
+REPO_NAME=UBUNTU_2404_NOBLE_UPDATES    
+pulp --no-verify-ssl deb remote create --name ${REPO_NAME} --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble-updates --architecture amd64  | jq -C
+pulp --no-verify-ssl deb repository update --name ${REPO_NAME} --remote ${REPO_NAME} --retain-repo-versions 1  | jq -C
+pulp --no-verify-ssl deb repository sync  --name ${REPO_NAME} --mirror
+PULP_HREF_CURR=$(pulp --no-verify-ssl deb publication --type apt create --repository ${REPO_NAME} | jq -r .pulp_href)
+pulp --no-verify-ssl deb distribution create --name ${REPO_NAME} --base-path ${REPO_NAME} --publication ${PULP_HREF_CURR}  | jq -C
+
+REPO_NAME=UBUNTU_2404_NOBLE_BACKPORTS  
+pulp --no-verify-ssl deb remote create --name ${REPO_NAME} --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble-backports --architecture amd64  | jq -C
+pulp --no-verify-ssl deb repository update --name ${REPO_NAME} --remote ${REPO_NAME} --retain-repo-versions 1  | jq -C
+pulp --no-verify-ssl deb repository sync  --name ${REPO_NAME} --mirror
+PULP_HREF_CURR=$(pulp --no-verify-ssl deb publication --type apt create --repository ${REPO_NAME} | jq -r .pulp_href)
+pulp --no-verify-ssl deb distribution create --name ${REPO_NAME} --base-path ${REPO_NAME} --publication ${PULP_HREF_CURR}  | jq -C
+
+REPO_NAME=UBUNTU_2404_NOBLE_SECURITY   
+pulp --no-verify-ssl deb remote create --name ${REPO_NAME} --url http://security.ubuntu.com/ubuntu/ --policy on_demand --distribution noble-security --architecture amd64  | jq -C
+pulp --no-verify-ssl deb repository update --name ${REPO_NAME} --remote ${REPO_NAME} --retain-repo-versions 1  | jq -C
+pulp --no-verify-ssl deb repository sync  --name ${REPO_NAME} --mirror
+PULP_HREF_CURR=$(pulp --no-verify-ssl deb publication --type apt create --repository ${REPO_NAME} | jq -r .pulp_href)
+pulp --no-verify-ssl deb distribution create --name ${REPO_NAME} --base-path ${REPO_NAME} --publication ${PULP_HREF_CURR}  | jq -C
+
 ```
 
 https://pulpproject.org/pulp-operator/docs/admin/guides/install/helm/
