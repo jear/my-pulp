@@ -1,5 +1,15 @@
 # my-pulp install in k8s
 
+# TL;DR
+```
+pulp config create --username admin --base-url http://10.180.10.128:24880 --password XXXXXXXXXXXXXXXXX --overwrite
+pulp --no-verify-ssl deb remote create --name UBUNTU_2404_NOBLE --url http://archive.ubuntu.com/ubuntu/ --policy on_demand --distribution noble --architecture amd64  | jq -C
+pulp --no-verify-ssl deb repository update --name UBUNTU_2404_NOBLE --remote UBUNTU_2404_NOBLE --retain-repo-versions 1  | jq -C
+pulp --no-verify-ssl deb repository sync  --name UBUNTU_2404_NOBLE --mirror
+pulp --no-verify-ssl deb publication --type apt      create --repository UBUNTU_2404_NOBLE
+pulp --no-verify-ssl deb distribution create --name UBUNTU_2404_NOBLE --base-path UBUNTU_2404_NOBLE --publication <H_REF>
+```
+
 https://pulpproject.org/pulp-operator/docs/admin/guides/install/helm/
 
 https://pulpproject.org/pulp-oci-images/docs/admin/guides/configure-signing-service/
