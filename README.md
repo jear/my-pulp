@@ -51,6 +51,7 @@ Types: deb
 Trusted: Yes
 URIs: http://10.180.10.128:24880/pulp/content/UBUNTU_2404_NOBLE_UPDATES/
 Suites: noble-updates
+Architectures: amd64
 Components: main restricted universe multiverse
 Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
@@ -58,6 +59,7 @@ Types: deb
 Trusted: Yes
 URIs: http://10.180.10.128:24880/pulp/content/UBUNTU_2404_NOBLE_BACKPORTS/
 Suites: noble-backports
+Architectures: amd64
 Components: main restricted universe multiverse
 Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
@@ -65,6 +67,7 @@ Types: deb
 Trusted: Yes
 URIs: http://10.180.10.128:24880/pulp/content/UBUNTU_2404_NOBLE_SECURITY/
 Suites: noble-security
+Architectures: amd64
 Components: main restricted universe multiverse
 Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
