@@ -33,6 +33,41 @@ pulp --no-verify-ssl deb repository sync  --name ${REPO_NAME} --mirror
 PULP_HREF_CURR=$(pulp --no-verify-ssl deb publication --type apt create --repository ${REPO_NAME} | jq -r .pulp_href)
 pulp --no-verify-ssl deb distribution create --name ${REPO_NAME} --base-path ${REPO_NAME} --publication ${PULP_HREF_CURR}  | jq -C
 
+
+```
+
+# Ubuntu 24.04 LTS /etc/apt/sources.list.d/ubuntu.sources
+```
+Types: deb
+Trusted: Yes
+URIs: http://10.180.10.128:24880/pulp/content/UBUNTU_2404_NOBLE/
+#Suites: noble noble-updates noble-backports
+Suites: noble
+Architectures: amd64
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+Trusted: Yes
+URIs: http://10.180.10.128:24880/pulp/content/UBUNTU_2404_NOBLE_UPDATES/
+Suites: noble-updates
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+Trusted: Yes
+URIs: http://10.180.10.128:24880/pulp/content/UBUNTU_2404_NOBLE_BACKPORTS/
+Suites: noble-backports
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+Trusted: Yes
+URIs: http://10.180.10.128:24880/pulp/content/UBUNTU_2404_NOBLE_SECURITY/
+Suites: noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
 ```
 
 https://pulpproject.org/pulp-operator/docs/admin/guides/install/helm/
